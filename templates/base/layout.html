@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block page_title %}{{ title | default('') }} — {{ app_title }}{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/platform.css" />
+  {% block head_extra %}{% endblock %}
+</head>
+<body>
+
+  <!-- ── Sidebar nav ─────────────────────────────────────────────── -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">⬡</span>
+      <span class="brand-name">{{ app_title }}</span>
+    </div>
+
+    <ul class="nav-list">
+      <li class="nav-item {% if request.url.path == '/dashboard' %}active{% endif %}">
+        <a href="/dashboard">
+          <span class="nav-icon">⊞</span> Dashboard
+        </a>
+      </li>
+      <li class="nav-divider">APPS</li>
+      {% for app in apps() %}
+      <li class="nav-item {% if request.url.path.startswith(app.prefix) %}active{% endif %}">
+        <a href="{{ app.prefix }}/">
+          <span class="nav-icon">{{ app.icon }}</span>
+          {{ app.name | replace('_', ' ') | title }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <div class="sidebar-footer">
+      {% if session is defined and session %}
+        <div class="user-info">
+          <span class="user-avatar">{{ session.display_name[0] | upper }}</span>
+          <div class="user-details">
+            <span class="user-name">{{ session.display_name }}</span>
+            <span class="user-group">{{ session.primary_group }}</span>
+          </div>
+        </div>
+        <a href="/logout" class="logout-btn" title="Log out">↪</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- ── Main content ────────────────────────────────────────────── -->
+  <main class="main-content">
+    <header class="page-header">
+      <div class="page-header-inner">
+        <h1 class="page-title">{% block header_title %}{{ title | default('') }}{% endblock %}</h1>
+        <div class="page-actions">{% block header_actions %}{% endblock %}</div>
+      </div>
+    </header>
+
+    <!-- Flash messages -->
+    {% if request.query_params.get('created') %}
+      <div class="alert alert-success">✓ Record created successfully.</div>
+    {% elif request.query_params.get('updated') %}
+      <div class="alert alert-success">✓ Record updated successfully.</div>
+    {% elif request.query_params.get('deleted') %}
+      <div class="alert alert-info">✓ Record deleted.</div>
+    {% elif request.query_params.get('error') %}
+      <div class="alert alert-error">✗ {{ request.query_params.get('error') }}</div>
+    {% endif %}
+
+    <div class="page-body">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <script src="/static/js/platform.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

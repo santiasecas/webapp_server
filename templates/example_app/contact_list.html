@@ -1,0 +1,86 @@
+{% extends "base/layout.html" %}
+{% from "components/table.html" import data_table, pagination %}
+
+{% block header_title %}Contacts{% endblock %}
+{% block header_actions %}
+  <a href="/apps/contacts/new" class="btn btn-primary">+ New Contact</a>
+{% endblock %}
+
+{% block content %}
+
+{# ── Search / filter bar ─────────────────────────────────────────── #}
+<form class="filter-bar" method="get" action="/apps/contacts/">
+  <input
+    type="search"
+    name="search"
+    value="{{ search }}"
+    placeholder="Search by name or email…"
+    class="field-input filter-search"
+  />
+  <select name="department" class="field-input filter-select">
+    <option value="">All departments</option>
+    {% for dept in departments %}
+      <option value="{{ dept }}" {% if dept == selected_dept %}selected{% endif %}>{{ dept }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit" class="btn btn-secondary">Filter</button>
+  {% if search or selected_dept %}
+    <a href="/apps/contacts/" class="btn btn-ghost">Clear</a>
+  {% endif %}
+</form>
+
+{# ── Results summary ──────────────────────────────────────────────── #}
+<p class="results-count">
+  {{ total }} contact{{ 's' if total != 1 else '' }} found
+  {% if search %}matching <strong>{{ search }}</strong>{% endif %}
+</p>
+
+{# ── Table ────────────────────────────────────────────────────────── #}
+{% if contacts %}
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Department</th>
+        <th>Created</th>
+        <th class="col-actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in contacts %}
+      <tr>
+        <td><a href="/apps/contacts/{{ c.id }}">{{ c.name }}</a></td>
+        <td><a href="mailto:{{ c.email }}">{{ c.email }}</a></td>
+        <td>{{ c.phone or '—' }}</td>
+        <td>{% if c.department %}<span class="badge">{{ c.department }}</span>{% else %}—{% endif %}</td>
+        <td class="text-muted">{{ c.created_at | date }}</td>
+        <td class="col-actions">
+          <a href="/apps/contacts/{{ c.id }}/edit" class="btn btn-sm">Edit</a>
+          <form method="post" action="/apps/contacts/{{ c.id }}/delete" style="display:inline"
+                onsubmit="return confirm('Delete {{ c.name }}?')">
+            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="empty-state">
+  <span class="empty-icon">👤</span>
+  <p>No contacts found.</p>
+  <a href="/apps/contacts/new" class="btn btn-primary">Add the first one</a>
+</div>
+{% endif %}
+
+{# ── Pagination ───────────────────────────────────────────────────── #}
+{% set extra = '' %}
+{% if search %}{% set extra = extra + '&search=' + search %}{% endif %}
+{% if selected_dept %}{% set extra = extra + '&department=' + selected_dept %}{% endif %}
+{{ pagination(page, total_pages, "/apps/contacts/", extra) }}
+
+{% endblock %}

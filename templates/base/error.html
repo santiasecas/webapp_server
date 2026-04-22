@@ -1,0 +1,11 @@
+{% extends "base/layout.html" %}
+{% block page_title %}Error {{ status_code }} — {{ app_title }}{% endblock %}
+{% block header_title %}Error {{ status_code }}{% endblock %}
+
+{% block content %}
+<div class="error-page">
+  <div class="error-code">{{ status_code }}</div>
+  <div class="error-message">{{ detail }}</div>
+  <a href="/dashboard" class="btn btn-primary">← Back to Dashboard</a>
+</div>
+{% endblock %}

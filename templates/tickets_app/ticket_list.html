@@ -1,0 +1,102 @@
+{% extends "base/layout.html" %}
+{% from "components/table.html" import pagination %}
+
+{% block header_title %}Tickets{% endblock %}
+{% block header_actions %}
+  <a href="/apps/tickets/new" class="btn btn-primary">+ New Ticket</a>
+{% endblock %}
+
+{% block content %}
+
+{# ── Stats bar ────────────────────────────────────────────────────── #}
+<div class="stats-bar">
+  {% for s in status_options %}
+    {% set count = stats.get(s.value, 0) %}
+    {% set label, css_class = status_labels[TicketStatus(s.value)] %}
+    <a href="/apps/tickets/?status={{ s.value }}"
+       class="stat-chip {% if status_filter == s.value %}stat-chip-active{% endif %}">
+      <span class="stat-num">{{ count }}</span>
+      <span class="stat-label">{{ label }}</span>
+    </a>
+  {% endfor %}
+  {% if status_filter or priority_filter or search %}
+    <a href="/apps/tickets/" class="stat-chip stat-chip-clear">✕ Clear filters</a>
+  {% endif %}
+</div>
+
+{# ── Filter bar ───────────────────────────────────────────────────── #}
+<form class="filter-bar" method="get" action="/apps/tickets/">
+  <input type="search" name="search" value="{{ search }}"
+         placeholder="Search tickets…" class="field-input filter-search"/>
+  <select name="status" class="field-input filter-select">
+    <option value="">All statuses</option>
+    {% for s in status_options %}
+      <option value="{{ s.value }}" {% if s.value == status_filter %}selected{% endif %}>{{ s.label }}</option>
+    {% endfor %}
+  </select>
+  <select name="priority" class="field-input filter-select">
+    <option value="">All priorities</option>
+    {% for p in priority_options %}
+      <option value="{{ p.value }}" {% if p.value == priority_filter %}selected{% endif %}>{{ p.label }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit" class="btn btn-secondary">Filter</button>
+</form>
+
+<p class="results-count">{{ total }} ticket{{ 's' if total != 1 else '' }}</p>
+
+{# ── Ticket table ─────────────────────────────────────────────────── #}
+{% if tickets %}
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width:50px">#</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Assigned To</th>
+        <th>Reporter</th>
+        <th>Created</th>
+        <th class="col-actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in tickets %}
+      {% set slabel, scls = status_labels[TicketStatus(t.status)] %}
+      {% set plabel, pcls = priority_labels[TicketPriority(t.priority)] %}
+      <tr>
+        <td class="text-muted font-mono">{{ t.id }}</td>
+        <td><a href="/apps/tickets/{{ t.id }}">{{ t.title }}</a></td>
+        <td><span class="badge {{ scls }}">{{ slabel }}</span></td>
+        <td><span class="badge {{ pcls }}">{{ plabel }}</span></td>
+        <td>{{ t.assigned_to or '—' }}</td>
+        <td class="text-muted">{{ t.reporter }}</td>
+        <td class="text-muted">{{ t.created_at | date }}</td>
+        <td class="col-actions">
+          <a href="/apps/tickets/{{ t.id }}/edit" class="btn btn-sm">Edit</a>
+          <form method="post" action="/apps/tickets/{{ t.id }}/delete" style="display:inline"
+                onsubmit="return confirm('Delete ticket #{{ t.id }}?')">
+            <button class="btn btn-sm btn-danger">Del</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="empty-state">
+  <span class="empty-icon">🎫</span>
+  <p>No tickets found.</p>
+  <a href="/apps/tickets/new" class="btn btn-primary">Open first ticket</a>
+</div>
+{% endif %}
+
+{% set extra = '' %}
+{% if search %}{% set extra = extra + '&search=' + search %}{% endif %}
+{% if status_filter %}{% set extra = extra + '&status=' + status_filter %}{% endif %}
+{% if priority_filter %}{% set extra = extra + '&priority=' + priority_filter %}{% endif %}
+{{ pagination(page, total_pages, "/apps/tickets/", extra) }}
+
+{% endblock %}

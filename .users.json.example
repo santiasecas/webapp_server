@@ -1,0 +1,24 @@
+{
+  "_comment": "Corporate Platform users file. Manage with: python scripts/manage_users.py",
+  "_format": "password_hash must be bcrypt ($2y$), SHA1 ({SHA}...), or APR1-MD5 ($apr1$...)",
+  "users": {
+    "admin": {
+      "password_hash": "$2y$12$REPLACE_WITH_REAL_HASH_USE_manage_users_script",
+      "groups": ["admins", "users"],
+      "display_name": "Administrator",
+      "active": true
+    },
+    "alice": {
+      "password_hash": "$2y$12$REPLACE_WITH_REAL_HASH_USE_manage_users_script",
+      "groups": ["users"],
+      "display_name": "Alice",
+      "active": true
+    },
+    "viewer": {
+      "password_hash": "$2y$12$REPLACE_WITH_REAL_HASH_USE_manage_users_script",
+      "groups": ["viewers"],
+      "display_name": "Read-Only User",
+      "active": true
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{#
+  Reusable table macro.
+
+  Usage:
+    {% from "components/table.html" import data_table %}
+    {{ data_table(
+        headers=["Name", "Email", "Department"],
+        rows=contacts,
+        row_fields=["name", "email", "department"],
+        row_link="/apps/contacts/{id}"
+    ) }}
+#}
+
+{% macro data_table(headers, rows, row_fields, row_link=None, empty_msg="No records found.") %}
+<div class="table-wrapper">
+  {% if rows %}
+  <table class="data-table">
+    <thead>
+      <tr>
+        {% for h in headers %}<th>{{ h }}</th>{% endfor %}
+        {% if row_link %}<th class="col-actions">Actions</th>{% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        {% for field in row_fields %}
+        <td>
+          {% set val = row[field] if row is mapping else row.__dict__.get(field, '') %}
+          {% if val is none %}—{% else %}{{ val }}{% endif %}
+        </td>
+        {% endfor %}
+        {% if row_link %}
+        <td class="col-actions">
+          {% set rid = row['id'] if row is mapping else row.id %}
+          <a href="{{ row_link.replace('{id}', rid | string) }}" class="btn btn-sm">View</a>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state">{{ empty_msg }}</div>
+  {% endif %}
+</div>
+{% endmacro %}
+
+
+{% macro pagination(page, total_pages, base_url, extra_params="") %}
+{% if total_pages > 1 %}
+<nav class="pagination">
+  {% if page > 1 %}
+    <a href="{{ base_url }}?page={{ page - 1 }}{{ extra_params }}" class="btn btn-sm">‹ Prev</a>
+  {% endif %}
+  <span class="pagination-info">Page {{ page }} of {{ total_pages }}</span>
+  {% if page < total_pages %}
+    <a href="{{ base_url }}?page={{ page + 1 }}{{ extra_params }}" class="btn btn-sm">Next ›</a>
+  {% endif %}
+</nav>
+{% endif %}
+{% endmacro %}

@@ -1,0 +1,76 @@
+{% extends "base/layout.html" %}
+{% from "components/table.html" import pagination %}
+
+{% block header_title %}Muteos (Mute Reports){% endblock %}
+{% block header_actions %}
+  <a href="/apps/muteos/new" class="btn btn-primary">+ New Report</a>
+{% endblock %}
+
+{% block content %}
+
+{# ── Filter bar ───────────────────────────────────────────────────── #}
+<form class="filter-bar" method="get" action="/apps/muteos/">
+  <input type="search" name="search" value="{{ search }}"
+         placeholder="Search in component, ticket, or comment…" class="field-input filter-search"/>
+  <input type="text" name="componente" value="{{ componente_filter }}"
+         placeholder="Filter by component…" class="field-input filter-search"/>
+  <button type="submit" class="btn btn-secondary">Filter</button>
+  {% if search or componente_filter %}
+    <a href="/apps/muteos/" class="btn btn-ghost">✕ Clear</a>
+  {% endif %}
+</form>
+
+<p class="results-count">{{ total }} record{{ 's' if total != 1 else '' }}</p>
+
+{# ── Mute reports table ───────────────────────────────────────────── #}
+{% if muteos %}
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width:50px">#</th>
+        <th>Component</th>
+        <th>Ticket</th>
+        <th>Comment</th>
+        <th>Reporter</th>
+        <th>Date</th>
+        <th class="col-actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in muteos %}
+      <tr>
+        <td class="text-muted font-mono">{{ m.id }}</td>
+        <td><strong>{{ m.componente }}</strong></td>
+        <td class="text-muted font-mono">{{ m.ticket }}</td>
+        <td class="truncate" title="{{ m.comentario }}">{{ m.comentario | truncate(60) }}</td>
+        <td class="text-muted">{{ m.usuario }}</td>
+        <td class="text-muted">{{ m.created_at | date }}</td>
+        <td class="col-actions">
+          <a href="/apps/muteos/{{ m.id }}" class="btn btn-sm">View</a>
+          {% if m.usuario == username %}
+          <form method="post" action="/apps/muteos/{{ m.id }}/delete" style="display:inline"
+                onsubmit="return confirm('Delete this report?')">
+            <button type="submit" class="btn btn-sm btn-danger">Del</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="empty-state">
+  <span class="empty-icon">🔇</span>
+  <p>No mute reports found.</p>
+  <a href="/apps/muteos/new" class="btn btn-primary">Create first report</a>
+</div>
+{% endif %}
+
+{% set extra = '' %}
+{% if search %}{% set extra = extra + '&search=' + search %}{% endif %}
+{% if componente_filter %}{% set extra = extra + '&componente=' + componente_filter %}{% endif %}
+{{ pagination(page, total_pages, "/apps/muteos/", extra) }}
+
+{% endblock %}

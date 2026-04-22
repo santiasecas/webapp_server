@@ -1,0 +1,59 @@
+{% extends "base/layout.html" %}
+
+{% block header_title %}{{ contact.name }}{% endblock %}
+{% block header_actions %}
+  <a href="/apps/contacts/{{ contact.id }}/edit" class="btn btn-primary">Edit</a>
+  <a href="/apps/contacts/" class="btn btn-ghost">← Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="detail-container">
+  <div class="detail-card">
+    <div class="detail-avatar">{{ contact.name[0] | upper }}</div>
+    <div class="detail-body">
+
+      <dl class="detail-list">
+        <div class="detail-row">
+          <dt>Full Name</dt>
+          <dd>{{ contact.name }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>Email</dt>
+          <dd><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></dd>
+        </div>
+        <div class="detail-row">
+          <dt>Phone</dt>
+          <dd>{{ contact.phone or '—' }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>Department</dt>
+          <dd>{% if contact.department %}<span class="badge">{{ contact.department }}</span>{% else %}—{% endif %}</dd>
+        </div>
+        {% if contact.notes %}
+        <div class="detail-row detail-row-full">
+          <dt>Notes</dt>
+          <dd class="notes-text">{{ contact.notes | nl2br }}</dd>
+        </div>
+        {% endif %}
+        <div class="detail-row">
+          <dt>Created</dt>
+          <dd class="text-muted">{{ contact.created_at | datetime }}</dd>
+        </div>
+        <div class="detail-row">
+          <dt>Last Updated</dt>
+          <dd class="text-muted">{{ contact.updated_at | datetime }}</dd>
+        </div>
+      </dl>
+
+    </div>
+  </div>
+
+  <div class="danger-zone">
+    <h4>Danger Zone</h4>
+    <form method="post" action="/apps/contacts/{{ contact.id }}/delete"
+          onsubmit="return confirm('Delete {{ contact.name }}? This cannot be undone.')">
+      <button type="submit" class="btn btn-danger">Delete Contact</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

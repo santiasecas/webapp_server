@@ -1,0 +1,71 @@
+{% extends "base/layout.html" %}
+{% from "components/form_fields.html" import text_field, textarea_field, select_field, submit_row %}
+
+{% block header_title %}{{ title }}{% endblock %}
+{% block header_actions %}
+  <a href="/apps/tickets/" class="btn btn-ghost">← Back to list</a>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+
+  {% if errors.general %}
+    <div class="alert alert-error">{{ errors.general }}</div>
+  {% endif %}
+
+  <form method="post" action="{{ form_action }}" novalidate>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Ticket Details</legend>
+
+      {{ text_field(
+          "title", "Title",
+          value=ticket.title if ticket else "",
+          required=True,
+          placeholder="Brief description of the issue…",
+          error=errors.get("title")
+      ) }}
+
+      {{ textarea_field(
+          "description", "Description",
+          value=ticket.description if ticket else "",
+          placeholder="Full details, steps to reproduce, context…",
+          rows=6,
+          error=errors.get("description")
+      ) }}
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Classification</legend>
+
+      {{ select_field(
+          "priority", "Priority",
+          options=priority_options,
+          value=(ticket.priority if ticket else "medium"),
+          allow_blank=False,
+          error=errors.get("priority")
+      ) }}
+
+      {# Only show status in edit mode (new tickets always start as "open") #}
+      {% if ticket and ticket.id %}
+        {{ select_field(
+            "status", "Status",
+            options=status_options,
+            value=ticket.status,
+            allow_blank=False,
+            error=errors.get("status")
+        ) }}
+      {% endif %}
+
+      {{ text_field(
+          "assigned_to", "Assign To",
+          value=ticket.assigned_to if ticket else "",
+          placeholder="Username (leave blank for unassigned)",
+          error=errors.get("assigned_to")
+      ) }}
+    </fieldset>
+
+    {{ submit_row(submit_label, cancel_url="/apps/tickets/") }}
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+# Environment
+.env
+.venv/
+venv/
+*.pyc
+__pycache__/
+*.egg-info/
+
+# Auth (NEVER commit)
+.htpasswd
+.htpasswd_*
+
+# Logs
+logs/
+*.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# DB
+*.db
+*.sqlite
+
+# OS
+.DS_Store
+Thumbs.db
+
+env/
+
+.users.json
+.env

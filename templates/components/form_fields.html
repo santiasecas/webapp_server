@@ -1,0 +1,89 @@
+{#
+  Reusable form field macros.
+
+  Usage:
+    {% from "components/form_fields.html" import text_field, email_field, textarea_field, select_field %}
+
+    {{ text_field("name", "Full Name", value=contact.name, required=True, error=errors.get("name")) }}
+    {{ email_field("email", "Email Address", value=contact.email, required=True, error=errors.get("email")) }}
+    {{ select_field("department", "Department", options=departments, value=contact.department) }}
+    {{ textarea_field("notes", "Notes", value=contact.notes) }}
+#}
+
+{% macro _field_wrapper(name, label, required, error) %}
+<div class="field {% if error %}field-error{% endif %}">
+  <label for="{{ name }}" class="field-label">
+    {{ label }}{% if required %} <span class="required">*</span>{% endif %}
+  </label>
+  {{ caller() }}
+  {% if error %}
+    <span class="field-hint field-hint-error">{{ error }}</span>
+  {% endif %}
+</div>
+{% endmacro %}
+
+{% macro text_field(name, label, value="", required=False, placeholder="", error=None, type="text") %}
+{% call _field_wrapper(name, label, required, error) %}
+  <input
+    type="{{ type }}"
+    id="{{ name }}"
+    name="{{ name }}"
+    value="{{ value or '' }}"
+    {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+    {% if required %}required{% endif %}
+    class="field-input {% if error %}input-error{% endif %}"
+  />
+{% endcall %}
+{% endmacro %}
+
+{% macro email_field(name, label, value="", required=False, error=None) %}
+  {{ text_field(name, label, value, required, placeholder="user@example.com", error=error, type="email") }}
+{% endmacro %}
+
+{% macro phone_field(name, label, value="", required=False, error=None) %}
+  {{ text_field(name, label, value, required, placeholder="+34 600 000 000", error=error, type="tel") }}
+{% endmacro %}
+
+{% macro textarea_field(name, label, value="", required=False, placeholder="", rows=4, error=None) %}
+{% call _field_wrapper(name, label, required, error) %}
+  <textarea
+    id="{{ name }}"
+    name="{{ name }}"
+    rows="{{ rows }}"
+    {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+    {% if required %}required{% endif %}
+    class="field-input field-textarea {% if error %}input-error{% endif %}"
+  >{{ value or '' }}</textarea>
+{% endcall %}
+{% endmacro %}
+
+{% macro select_field(name, label, options=[], value="", required=False, error=None, allow_blank=True, blank_label="— Select —") %}
+{% call _field_wrapper(name, label, required, error) %}
+  <select
+    id="{{ name }}"
+    name="{{ name }}"
+    {% if required %}required{% endif %}
+    class="field-input field-select {% if error %}input-error{% endif %}"
+  >
+    {% if allow_blank %}
+      <option value="">{{ blank_label }}</option>
+    {% endif %}
+    {% for opt in options %}
+      {% if opt is mapping %}
+        <option value="{{ opt.value }}" {% if opt.value == value %}selected{% endif %}>{{ opt.label }}</option>
+      {% else %}
+        <option value="{{ opt }}" {% if opt == value %}selected{% endif %}>{{ opt }}</option>
+      {% endif %}
+    {% endfor %}
+  </select>
+{% endcall %}
+{% endmacro %}
+
+{% macro submit_row(submit_label="Save", cancel_url=None) %}
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">{{ submit_label }}</button>
+  {% if cancel_url %}
+    <a href="{{ cancel_url }}" class="btn btn-secondary">Cancel</a>
+  {% endif %}
+</div>
+{% endmacro %}

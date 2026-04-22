@@ -1,0 +1,83 @@
+{% extends "base/layout.html" %}
+{% from "components/form_fields.html" import text_field, email_field, phone_field, textarea_field, select_field, submit_row %}
+
+{% block header_title %}{{ title }}{% endblock %}
+{% block header_actions %}
+  <a href="/apps/contacts/" class="btn btn-ghost">← Back to list</a>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+
+  {% if errors.general %}
+    <div class="alert alert-error">{{ errors.general }}</div>
+  {% endif %}
+
+  <form method="post" action="{{ form_action }}" novalidate>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Contact Information</legend>
+
+      {{ text_field(
+          "name", "Full Name",
+          value=contact.name if contact else "",
+          required=True,
+          placeholder="Jane Doe",
+          error=errors.get("name")
+      ) }}
+
+      {{ email_field(
+          "email", "Email Address",
+          value=contact.email if contact else "",
+          required=True,
+          error=errors.get("email")
+      ) }}
+
+      {{ phone_field(
+          "phone", "Phone Number",
+          value=contact.phone if contact else "",
+          error=errors.get("phone")
+      ) }}
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Organisation</legend>
+
+      {# Allows both existing options and free-text for new departments #}
+      <div class="field {% if errors.get('department') %}field-error{% endif %}">
+        <label for="department" class="field-label">Department</label>
+        <input
+          type="text"
+          id="department"
+          name="department"
+          value="{{ contact.department if contact else '' }}"
+          list="dept-list"
+          placeholder="Engineering, HR, Finance…"
+          class="field-input"
+        />
+        <datalist id="dept-list">
+          {% for d in departments %}
+            <option value="{{ d }}">
+          {% endfor %}
+        </datalist>
+        {% if errors.get("department") %}
+          <span class="field-hint field-hint-error">{{ errors.department }}</span>
+        {% endif %}
+      </div>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Notes</legend>
+      {{ textarea_field(
+          "notes", "Additional Notes",
+          value=contact.notes if contact else "",
+          placeholder="Any relevant information…",
+          rows=4,
+          error=errors.get("notes")
+      ) }}
+    </fieldset>
+
+    {{ submit_row(submit_label, cancel_url="/apps/contacts/") }}
+  </form>
+</div>
+{% endblock %}

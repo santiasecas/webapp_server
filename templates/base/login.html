@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — {{ app_title }}</title>
+  <link rel="stylesheet" href="/static/css/platform.css" />
+</head>
+<body class="login-body">
+
+  <div class="login-shell">
+
+    <!-- Left panel: branding -->
+    <div class="login-panel-brand">
+      <div class="login-brand-inner">
+        <span class="login-brand-icon">⬡</span>
+        <h1 class="login-brand-name">{{ app_title }}</h1>
+        <p class="login-brand-tagline">Internal platform — authorised access only</p>
+      </div>
+      <div class="login-brand-footer">v{{ app_version }}</div>
+    </div>
+
+    <!-- Right panel: form -->
+    <div class="login-panel-form">
+      <div class="login-form-inner">
+
+        <div class="login-form-header">
+          <h2 class="login-title">Sign in</h2>
+          <p class="login-subtitle">Enter your credentials to continue</p>
+        </div>
+
+        {% if error %}
+        <div class="login-error" role="alert">
+          <span class="login-error-icon">⚠</span>
+          {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="post" action="/login" novalidate>
+          <input type="hidden" name="next" value="{{ next }}" />
+
+          <div class="login-field">
+            <label for="username" class="login-label">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              autocomplete="username"
+              autofocus
+              required
+              class="login-input {% if error %}login-input-error{% endif %}"
+              placeholder="your.username"
+            />
+          </div>
+
+          <div class="login-field">
+            <label for="password" class="login-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autocomplete="current-password"
+              required
+              class="login-input {% if error %}login-input-error{% endif %}"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button type="submit" class="login-btn">
+            Sign in <span class="login-btn-arrow">→</span>
+          </button>
+        </form>
+
+        <p class="login-help">
+          Contact your administrator if you have forgotten your credentials.
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

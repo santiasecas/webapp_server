@@ -1,0 +1,41 @@
+{% extends "base/layout.html" %}
+
+{% block header_title %}Platform Dashboard{% endblock %}
+
+{% block content %}
+{% set app_list = apps() %}
+<section class="dashboard-grid">
+  {% for app in app_list %}
+  <a class="app-card" href="{{ app.prefix }}/">
+    <span class="app-card-icon">{{ app.icon }}</span>
+    <div class="app-card-body">
+      <h3 class="app-card-title">{{ app.name | replace('_', ' ') | title }}</h3>
+      <p class="app-card-desc">{{ app.description }}</p>
+    </div>
+    <span class="app-card-arrow">→</span>
+  </a>
+  {% else %}
+  <div class="empty-state">
+    <p>No apps registered yet.</p>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="info-grid">
+  <div class="info-card">
+    <h4>Quick Links</h4>
+    <ul>
+      <li><a href="/health">Health Check (JSON)</a></li>
+      {% if debug %}<li><a href="/api/docs">API Docs (Swagger)</a></li>{% endif %}
+    </ul>
+  </div>
+  <div class="info-card">
+    <h4>Environment</h4>
+    <ul>
+      <li>Version: <strong>{{ app_version }}</strong></li>
+      <li>Env: <strong>{{ environment }}</strong></li>
+      <li>Apps registered: <strong>{{ app_list | length }}</strong></li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

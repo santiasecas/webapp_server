@@ -1,0 +1,1236 @@
+2026-04-22 20:37:41,554 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 20:37:41,559 | INFO     | main | Starting Corporate Platform...
+2026-04-22 20:37:41,560 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 20:53:31,657 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 20:53:31,662 | INFO     | main | Starting Corporate Platform...
+2026-04-22 20:53:31,663 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 20:55:15,923 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 20:55:15,928 | INFO     | main | Starting Corporate Platform...
+2026-04-22 20:55:15,929 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 20:56:03,966 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 20:56:03,972 | INFO     | main | Starting Corporate Platform...
+2026-04-22 20:56:03,972 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 20:57:41,294 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 20:57:41,299 | INFO     | main | Starting Corporate Platform...
+2026-04-22 20:57:41,299 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 20:58:58,235 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 20:58:58,240 | INFO     | main | Starting Corporate Platform...
+2026-04-22 20:58:58,240 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:00:29,052 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:00:29,057 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:00:29,057 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:02:36,445 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:02:36,450 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:02:36,451 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:02:36,570 | INFO     | main | Database tables verified/created.
+2026-04-22 21:02:36,571 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:02:36,571 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:02:36,571 | INFO     | main | Platform ready.
+2026-04-22 21:02:52,662 | INFO     | core.middleware | [cf766289] GET / → 302 (0.3ms) user=-
+2026-04-22 21:02:52,688 | INFO     | core.middleware | [003b3f60] GET /login → 200 (21.1ms) user=-
+2026-04-22 21:02:52,784 | INFO     | core.middleware | [68006fdc] GET /static/css/platform.css → 200 (71.5ms) user=-
+2026-04-22 21:02:53,055 | INFO     | core.middleware | [ae6b7d05] GET /favicon.ico → 404 (47.0ms) user=-
+2026-04-22 21:03:00,535 | INFO     | core.users | Loaded 2 user(s) from .users.json [groups: ['admins', 'users']]
+2026-04-22 21:03:00,760 | WARNING  | main | Failed login: user='admin' ip=127.0.0.1
+2026-04-22 21:03:00,761 | INFO     | core.middleware | [46545c58] POST /login → 401 (242.5ms) user=-
+2026-04-22 21:03:04,464 | WARNING  | main | Failed login: user='admin' ip=127.0.0.1
+2026-04-22 21:03:04,465 | INFO     | core.middleware | [a5375e0b] POST /login → 401 (222.4ms) user=-
+2026-04-22 21:03:17,922 | INFO     | main | Login: user='santi' groups=['users'] ip=127.0.0.1
+2026-04-22 21:03:17,924 | INFO     | core.middleware | [7c3f0b51] POST /login → 303 (223.6ms) user=-
+2026-04-22 21:03:17,929 | INFO     | core.middleware | [56e83534] GET / → 307 (0.5ms) user=santi
+2026-04-22 21:03:17,947 | INFO     | core.middleware | [b2c183f7] GET /dashboard → 200 (13.4ms) user=santi
+2026-04-22 21:03:17,981 | INFO     | core.middleware | [dd93a4be] GET /static/js/platform.js → 200 (4.8ms) user=-
+2026-04-22 21:03:24,161 | INFO     | core.middleware | [dd0475d9] GET /apps/contacts/ → 200 (50.4ms) user=santi
+2026-04-22 21:03:26,654 | INFO     | core.middleware | [e6d4c6c4] GET /apps/tickets/ → 500 (20.4ms) user=santi
+2026-04-22 21:03:26,670 | ERROR    | core.error_handlers | Unhandled exception: name 'session' is not defined
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\anyio\_backends\_asyncio.py", line 799, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    |     async for chunk in self.body_iterator:
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    |     raise app_exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    |     async for chunk in self.body_iterator:
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    |     raise app_exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 460, in handle
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 288, in handle
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 76, in app
+    |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 73, in app
+    |     response = await f(request)
+    |                ^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 301, in app
+    |     raw_response = await run_endpoint_function(
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    |     return await dependant.call(**values)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 68, in list_tickets
+    |     ctx = _base_ctx(request, session.username)
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 38, in _base_ctx
+    |     "username": session.username,
+    |                 ^^^^^^^
+    | NameError: name 'session' is not defined
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    async for chunk in self.body_iterator:
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    raise app_exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    async for chunk in self.body_iterator:
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    raise app_exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 460, in handle
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 68, in list_tickets
+    ctx = _base_ctx(request, session.username)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 38, in _base_ctx
+    "username": session.username,
+                ^^^^^^^
+NameError: name 'session' is not defined
+
+2026-04-22 21:03:31,155 | INFO     | core.middleware | [3ac918a0] GET /dashboard → 200 (0.9ms) user=santi
+2026-04-22 21:03:35,790 | INFO     | main | Logout: ip=127.0.0.1
+2026-04-22 21:03:35,791 | INFO     | core.middleware | [4c8a1753] GET /logout → 302 (1.5ms) user=santi
+2026-04-22 21:03:35,796 | INFO     | core.middleware | [72fd1749] GET /login → 200 (0.7ms) user=-
+2026-04-22 21:03:41,602 | INFO     | main | Shutting down Corporate Platform...
+2026-04-22 21:04:04,781 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:04:04,786 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:04:04,786 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:04:04,880 | INFO     | main | Database tables verified/created.
+2026-04-22 21:04:04,881 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:04:04,881 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:04:04,881 | INFO     | main | Platform ready.
+2026-04-22 21:04:07,142 | INFO     | core.users | Loaded 2 user(s) from .users.json [groups: ['users']]
+2026-04-22 21:04:07,364 | INFO     | main | Login: user='admin' groups=['users'] ip=127.0.0.1
+2026-04-22 21:04:07,365 | INFO     | core.middleware | [f6d91384] POST /login → 303 (224.9ms) user=-
+2026-04-22 21:04:07,383 | INFO     | core.middleware | [5974fc83] GET /dashboard → 200 (13.6ms) user=admin
+2026-04-22 21:04:10,947 | INFO     | core.middleware | [50dd83a2] GET /apps/contacts/ → 200 (29.0ms) user=admin
+2026-04-22 21:04:12,031 | INFO     | core.middleware | [42793df6] GET /apps/tickets/ → 500 (19.6ms) user=admin
+2026-04-22 21:04:12,044 | ERROR    | core.error_handlers | Unhandled exception: name 'session' is not defined
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\anyio\_backends\_asyncio.py", line 799, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    |     async for chunk in self.body_iterator:
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    |     raise app_exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    |     async for chunk in self.body_iterator:
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    |     raise app_exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 460, in handle
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 288, in handle
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 76, in app
+    |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 73, in app
+    |     response = await f(request)
+    |                ^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 301, in app
+    |     raw_response = await run_endpoint_function(
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    |     return await dependant.call(**values)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 68, in list_tickets
+    |     ctx = _base_ctx(request, session.username)
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 38, in _base_ctx
+    |     "username": session.username,
+    |                 ^^^^^^^
+    | NameError: name 'session' is not defined
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    async for chunk in self.body_iterator:
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    raise app_exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    async for chunk in self.body_iterator:
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    raise app_exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 460, in handle
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 68, in list_tickets
+    ctx = _base_ctx(request, session.username)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 38, in _base_ctx
+    "username": session.username,
+                ^^^^^^^
+NameError: name 'session' is not defined
+
+2026-04-22 21:04:14,698 | INFO     | core.middleware | [cc0daca8] GET /dashboard → 200 (0.9ms) user=admin
+2026-04-22 21:04:15,204 | INFO     | core.middleware | [d79695a4] GET /apps/tickets/ → 500 (4.6ms) user=admin
+2026-04-22 21:04:15,212 | ERROR    | core.error_handlers | Unhandled exception: name 'session' is not defined
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\anyio\_backends\_asyncio.py", line 799, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    |     async for chunk in self.body_iterator:
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    |     raise app_exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    |     async for chunk in self.body_iterator:
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    |     raise app_exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 460, in handle
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 288, in handle
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 76, in app
+    |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 73, in app
+    |     response = await f(request)
+    |                ^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 301, in app
+    |     raw_response = await run_endpoint_function(
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    |     return await dependant.call(**values)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 68, in list_tickets
+    |     ctx = _base_ctx(request, session.username)
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 38, in _base_ctx
+    |     "username": session.username,
+    |                 ^^^^^^^
+    | NameError: name 'session' is not defined
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    async for chunk in self.body_iterator:
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    raise app_exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    async for chunk in self.body_iterator:
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    raise app_exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 460, in handle
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 68, in list_tickets
+    ctx = _base_ctx(request, session.username)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 38, in _base_ctx
+    "username": session.username,
+                ^^^^^^^
+NameError: name 'session' is not defined
+
+2026-04-22 21:04:27,414 | INFO     | core.middleware | [7c862a5b] GET /apps/tickets/ → 500 (4.5ms) user=admin
+2026-04-22 21:04:27,422 | ERROR    | core.error_handlers | Unhandled exception: name 'session' is not defined
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\anyio\_backends\_asyncio.py", line 799, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    |     async for chunk in self.body_iterator:
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    |     raise app_exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    |     async for chunk in self.body_iterator:
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    |     raise app_exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 460, in handle
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 288, in handle
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 76, in app
+    |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 73, in app
+    |     response = await f(request)
+    |                ^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 301, in app
+    |     raw_response = await run_endpoint_function(
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    |     return await dependant.call(**values)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 68, in list_tickets
+    |     ctx = _base_ctx(request, session.username)
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 38, in _base_ctx
+    |     "username": session.username,
+    |                 ^^^^^^^
+    | NameError: name 'session' is not defined
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    async for chunk in self.body_iterator:
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    raise app_exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    async for chunk in self.body_iterator:
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    raise app_exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 460, in handle
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 68, in list_tickets
+    ctx = _base_ctx(request, session.username)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 38, in _base_ctx
+    "username": session.username,
+                ^^^^^^^
+NameError: name 'session' is not defined
+
+2026-04-22 21:04:39,196 | INFO     | main | Logout: ip=127.0.0.1
+2026-04-22 21:04:39,197 | INFO     | core.middleware | [37929a01] GET /logout → 302 (1.7ms) user=admin
+2026-04-22 21:04:39,205 | INFO     | core.middleware | [0dc77327] GET /login → 200 (2.8ms) user=-
+2026-04-22 21:04:41,885 | INFO     | main | Login: user='admin' groups=['users'] ip=127.0.0.1
+2026-04-22 21:04:41,886 | INFO     | core.middleware | [49d088b0] POST /login → 303 (223.1ms) user=-
+2026-04-22 21:04:41,892 | INFO     | core.middleware | [f9d4d0a2] GET /dashboard → 200 (0.9ms) user=admin
+2026-04-22 21:04:43,716 | INFO     | core.middleware | [93f095a7] GET /apps/tickets/ → 500 (6.2ms) user=admin
+2026-04-22 21:04:43,725 | ERROR    | core.error_handlers | Unhandled exception: name 'session' is not defined
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |   File "C:\dev\webapp_server\env\web\Lib\site-packages\anyio\_backends\_asyncio.py", line 799, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    |     async for chunk in self.body_iterator:
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    |     raise app_exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    |     async for chunk in self.body_iterator:
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    |     raise app_exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 460, in handle
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 288, in handle
+    |     await self.app(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 76, in app
+    |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 73, in app
+    |     response = await f(request)
+    |                ^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 301, in app
+    |     raw_response = await run_endpoint_function(
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    |     return await dependant.call(**values)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 68, in list_tickets
+    |     ctx = _base_ctx(request, session.username)
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 38, in _base_ctx
+    |     "username": session.username,
+    |                 ^^^^^^^
+    | NameError: name 'session' is not defined
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    async for chunk in self.body_iterator:
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    raise app_exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "C:\Users\Santi\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 222, in __call__
+    async for chunk in self.body_iterator:
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 179, in body_stream
+    raise app_exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 460, in handle
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\env\web\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 68, in list_tickets
+    ctx = _base_ctx(request, session.username)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\webapp_server\apps\tickets_app\routers\tickets.py", line 38, in _base_ctx
+    "username": session.username,
+                ^^^^^^^
+NameError: name 'session' is not defined
+
+2026-04-22 21:06:52,287 | INFO     | main | Shutting down Corporate Platform...
+2026-04-22 21:06:53,681 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:06:53,686 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:06:53,686 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:06:53,786 | INFO     | main | Database tables verified/created.
+2026-04-22 21:06:53,787 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:06:53,787 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:06:53,787 | INFO     | main | Platform ready.
+2026-04-22 21:06:55,049 | INFO     | core.middleware | [77681a4a] GET /apps/tickets/ → 200 (85.1ms) user=admin
+2026-04-22 21:06:55,144 | INFO     | core.middleware | [8583e08d] GET /static/css/platform.css → 304 (67.7ms) user=-
+2026-04-22 21:07:05,660 | INFO     | core.middleware | [767138d5] GET /apps/tickets/new → 200 (40.9ms) user=admin
+2026-04-22 21:07:18,753 | INFO     | apps.tickets_app.repositories.ticket_repository | Created ticket id=1: 'Test'
+2026-04-22 21:07:18,757 | INFO     | core.middleware | [239e2347] POST /apps/tickets/new → 303 (13.6ms) user=admin
+2026-04-22 21:07:18,785 | INFO     | core.middleware | [7167a49e] GET /apps/tickets/1 → 200 (23.9ms) user=admin
+2026-04-22 21:07:24,927 | INFO     | core.middleware | [a481bad7] GET /apps/tickets/ → 200 (5.3ms) user=admin
+2026-04-22 21:10:51,502 | INFO     | core.middleware | [c85538f2] GET /apps/contacts/ → 200 (17.3ms) user=admin
+2026-04-22 21:10:53,836 | INFO     | core.middleware | [c34e63f5] GET /dashboard → 200 (4.6ms) user=admin
+2026-04-22 21:11:52,674 | INFO     | main | Shutting down Corporate Platform...
+2026-04-22 21:11:54,121 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:11:54,127 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:11:54,127 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:11:54,222 | INFO     | main | Database tables verified/created.
+2026-04-22 21:11:54,222 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:11:54,224 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:11:54,224 | INFO     | main | Platform ready.
+2026-04-22 21:11:55,583 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:11:55,589 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:11:55,590 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:11:55,680 | INFO     | main | Database tables verified/created.
+2026-04-22 21:11:55,681 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:11:55,681 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:11:55,681 | INFO     | main | Platform ready.
+2026-04-22 21:13:29,794 | INFO     | main | Shutting down Corporate Platform...
+2026-04-22 21:13:31,270 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:13:31,276 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:13:31,277 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:13:31,406 | INFO     | main | Database tables verified/created.
+2026-04-22 21:13:31,407 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:13:31,407 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:13:31,407 | INFO     | main |   ✓ App registered: 'muteos_app' at /apps/muteos
+2026-04-22 21:13:31,408 | INFO     | main | Platform ready.
+2026-04-22 21:13:32,839 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:13:32,845 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:13:32,846 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:13:32,943 | INFO     | main | Database tables verified/created.
+2026-04-22 21:13:32,944 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:13:32,944 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:13:32,945 | INFO     | main |   ✓ App registered: 'muteos_app' at /apps/muteos
+2026-04-22 21:13:32,945 | INFO     | main | Platform ready.
+2026-04-22 21:15:42,085 | INFO     | main | Shutting down Corporate Platform...
+2026-04-22 21:15:43,580 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:15:43,586 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:15:43,586 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:15:43,681 | INFO     | main | Database tables verified/created.
+2026-04-22 21:15:43,682 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:15:43,682 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:15:43,683 | INFO     | main |   ✓ App registered: 'muteos_app' at /apps/muteos
+2026-04-22 21:15:43,683 | INFO     | main | Platform ready.
+2026-04-22 21:15:49,459 | INFO     | core.middleware | [8e4870d1] GET /dashboard → 200 (12.4ms) user=admin
+2026-04-22 21:15:49,540 | INFO     | core.middleware | [f4a66eb5] GET /static/css/platform.css → 304 (57.5ms) user=-
+2026-04-22 21:15:51,856 | INFO     | core.middleware | [02496c30] GET /apps/muteos/ → 200 (27.6ms) user=admin
+2026-04-22 21:15:56,309 | INFO     | core.middleware | [8c7f428d] GET /apps/muteos/new → 200 (23.4ms) user=admin
+2026-04-22 21:16:24,801 | INFO     | apps.muteos_app.routers.muteos | Muteo #1 created by admin
+2026-04-22 21:16:24,803 | INFO     | core.middleware | [ae20aa9a] POST /apps/muteos/new → 303 (9.8ms) user=admin
+2026-04-22 21:16:24,815 | INFO     | core.middleware | [91187fed] GET /apps/muteos/ → 200 (6.1ms) user=admin
+2026-04-22 21:16:28,982 | INFO     | core.middleware | [bf6b1d33] GET /apps/muteos/1 → 200 (10.0ms) user=admin
+2026-04-22 21:16:32,784 | INFO     | core.middleware | [5171efea] GET /apps/muteos/ → 200 (5.0ms) user=admin
+2026-04-22 21:16:35,276 | INFO     | core.middleware | [4f1af3d4] GET /apps/muteos/new → 200 (1.7ms) user=admin
+2026-04-22 21:16:36,617 | INFO     | core.middleware | [baaf3d6f] GET /apps/muteos/ → 200 (4.6ms) user=admin
+2026-04-22 21:17:29,272 | INFO     | core.middleware | [8f20d0b5] GET /apps/muteos/ → 200 (6.8ms) user=admin
+2026-04-22 21:17:32,883 | INFO     | core.middleware | [1819d3be] GET /apps/muteos/new → 200 (1.5ms) user=admin
+2026-04-22 21:17:54,805 | INFO     | apps.muteos_app.routers.muteos | Muteo #2 created by admin
+2026-04-22 21:17:54,808 | INFO     | core.middleware | [5bd07d03] POST /apps/muteos/new → 303 (6.5ms) user=admin
+2026-04-22 21:17:54,817 | INFO     | core.middleware | [f75c1d37] GET /apps/muteos/ → 200 (4.4ms) user=admin
+2026-04-22 21:17:58,231 | INFO     | core.middleware | [4abe592e] GET /apps/muteos/ → 200 (5.5ms) user=admin
+2026-04-22 21:18:00,887 | INFO     | core.middleware | [7de717d3] GET /apps/muteos/ → 200 (4.4ms) user=admin
+2026-04-22 21:18:09,471 | INFO     | core.middleware | [50b4aeaf] GET /dashboard → 200 (1.0ms) user=admin
+2026-04-22 21:20:31,921 | INFO     | main | Shutting down Corporate Platform...
+2026-04-22 21:20:33,642 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:20:33,649 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:20:33,650 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:20:33,779 | INFO     | main | Database tables verified/created.
+2026-04-22 21:20:33,780 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:20:33,780 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:20:33,781 | INFO     | main |   ✓ App registered: 'muteos_app' at /apps/muteos
+2026-04-22 21:20:33,781 | INFO     | main | Platform ready.
+2026-04-22 21:20:35,319 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:20:35,325 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:20:35,325 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:20:35,424 | INFO     | main | Database tables verified/created.
+2026-04-22 21:20:35,425 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:20:35,425 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:20:35,425 | INFO     | main |   ✓ App registered: 'muteos_app' at /apps/muteos
+2026-04-22 21:20:35,425 | INFO     | main | Platform ready.
+2026-04-22 21:25:34,212 | INFO     | main | Shutting down Corporate Platform...
+2026-04-22 21:25:35,692 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:25:35,700 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:25:35,701 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:25:35,801 | INFO     | main | Database tables verified/created.
+2026-04-22 21:25:35,802 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:25:35,802 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:25:35,802 | INFO     | main |   ✓ App registered: 'muteos_app' at /apps/muteos
+2026-04-22 21:25:35,803 | INFO     | main | Platform ready.
+2026-04-22 21:25:37,111 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:25:37,120 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:25:37,120 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:25:37,212 | INFO     | main | Database tables verified/created.
+2026-04-22 21:25:37,212 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:25:37,213 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:25:37,213 | INFO     | main |   ✓ App registered: 'muteos_app' at /apps/muteos
+2026-04-22 21:25:37,213 | INFO     | main | Platform ready.
+2026-04-22 21:25:45,147 | INFO     | core.middleware | [5a75a25f] GET /dashboard → 200 (13.6ms) user=admin
+2026-04-22 21:25:45,252 | INFO     | core.middleware | [3e7ff569] GET /static/css/platform.css → 304 (74.1ms) user=-
+2026-04-22 21:25:46,966 | INFO     | core.middleware | [4b262133] GET /dashboard → 200 (1.1ms) user=admin
+2026-04-22 21:25:49,451 | INFO     | core.middleware | [fb389a78] GET /dashboard → 200 (1.3ms) user=admin
+2026-04-22 21:25:49,982 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:25:49,984 | INFO     | core.middleware | [3ba602ae] GET /apps/contacts/ → 302 (2.6ms) user=admin
+2026-04-22 21:25:49,989 | INFO     | core.middleware | [91d7eca2] GET /dashboard → 200 (1.1ms) user=admin
+2026-04-22 21:25:53,643 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:25:53,644 | INFO     | core.middleware | [1e34b9b4] GET /apps/tickets/ → 302 (1.8ms) user=admin
+2026-04-22 21:25:53,650 | INFO     | core.middleware | [07c7011d] GET /dashboard → 200 (1.2ms) user=admin
+2026-04-22 21:25:54,605 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:25:54,606 | INFO     | core.middleware | [f9a9e4fa] GET /apps/muteos/ → 302 (1.5ms) user=admin
+2026-04-22 21:25:54,612 | INFO     | core.middleware | [00edf4a8] GET /dashboard → 200 (1.1ms) user=admin
+2026-04-22 21:25:55,849 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:25:55,850 | INFO     | core.middleware | [c098e4b3] GET /apps/contacts/ → 302 (1.7ms) user=admin
+2026-04-22 21:25:55,856 | INFO     | core.middleware | [0cc2917e] GET /dashboard → 200 (1.3ms) user=admin
+2026-04-22 21:25:56,184 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:25:56,187 | INFO     | core.middleware | [794fb5cf] GET /apps/tickets/ → 302 (1.8ms) user=admin
+2026-04-22 21:25:56,192 | INFO     | core.middleware | [4fa0df87] GET /dashboard → 200 (1.2ms) user=admin
+2026-04-22 21:25:56,712 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:25:56,714 | INFO     | core.middleware | [b4b90945] GET /apps/contacts/ → 302 (1.9ms) user=admin
+2026-04-22 21:25:56,720 | INFO     | core.middleware | [acd197ea] GET /dashboard → 200 (1.0ms) user=admin
+2026-04-22 21:25:57,106 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:25:57,108 | INFO     | core.middleware | [ad001026] GET /apps/muteos/ → 302 (1.7ms) user=admin
+2026-04-22 21:25:57,113 | INFO     | core.middleware | [2df18a23] GET /dashboard → 200 (1.2ms) user=admin
+2026-04-22 21:26:01,485 | INFO     | core.middleware | [4f626c9c] GET /dashboard → 200 (1.2ms) user=admin
+2026-04-22 21:26:03,923 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:26:03,924 | INFO     | core.middleware | [cc569895] GET /apps/contacts/ → 302 (1.7ms) user=admin
+2026-04-22 21:26:03,929 | INFO     | core.middleware | [62b53768] GET /dashboard → 200 (1.3ms) user=admin
+2026-04-22 21:26:10,271 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:26:10,272 | INFO     | core.middleware | [1f81016c] GET /apps/contacts/ → 302 (1.7ms) user=admin
+2026-04-22 21:26:10,277 | INFO     | core.middleware | [6da50617] GET /dashboard → 200 (1.3ms) user=admin
+2026-04-22 21:28:31,832 | INFO     | main | Shutting down Corporate Platform...
+2026-04-22 21:28:39,294 | INFO     | core.logging_config | Logging configured: level=INFO, file=# Leave empty for stdout only
+2026-04-22 21:28:39,306 | INFO     | main | Starting Corporate Platform...
+2026-04-22 21:28:39,307 | INFO     | main | Environment: development  |  Debug: True
+2026-04-22 21:28:39,426 | INFO     | main | Database tables verified/created.
+2026-04-22 21:28:39,426 | INFO     | main |   ✓ App registered: 'example_app' at /apps/contacts
+2026-04-22 21:28:39,427 | INFO     | main |   ✓ App registered: 'tickets_app' at /apps/tickets
+2026-04-22 21:28:39,427 | INFO     | main |   ✓ App registered: 'muteos_app' at /apps/muteos
+2026-04-22 21:28:39,428 | INFO     | main | Platform ready.
+2026-04-22 21:28:54,239 | INFO     | core.middleware | [9d45f700] GET /dashboard → 200 (13.7ms) user=admin
+2026-04-22 21:28:58,053 | INFO     | core.middleware | [8554686a] GET /dashboard → 200 (1.4ms) user=admin
+2026-04-22 21:28:59,854 | INFO     | main | Logout: ip=127.0.0.1
+2026-04-22 21:28:59,854 | INFO     | core.middleware | [5704a7d5] GET /logout → 302 (1.2ms) user=admin
+2026-04-22 21:28:59,864 | INFO     | core.middleware | [6529a3bd] GET /login → 200 (4.0ms) user=-
+2026-04-22 21:29:02,735 | INFO     | core.users | Loaded 2 user(s) from .users.json [groups: ['users']]
+2026-04-22 21:29:02,955 | INFO     | main | Login: user='admin' groups=['users'] ip=127.0.0.1
+2026-04-22 21:29:02,956 | INFO     | core.middleware | [82d8a0ee] POST /login → 303 (222.9ms) user=-
+2026-04-22 21:29:02,962 | INFO     | core.middleware | [f70d7a52] GET /dashboard → 200 (1.3ms) user=admin
+2026-04-22 21:29:06,872 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:29:06,873 | INFO     | core.middleware | [3d512b45] GET /apps/contacts/ → 302 (2.3ms) user=admin
+2026-04-22 21:29:06,879 | INFO     | core.middleware | [c68d3bfd] GET /dashboard → 200 (1.1ms) user=admin
+2026-04-22 21:29:07,917 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:29:07,918 | INFO     | core.middleware | [7de54c5b] GET /apps/tickets/ → 302 (1.6ms) user=admin
+2026-04-22 21:29:07,924 | INFO     | core.middleware | [03c040ea] GET /dashboard → 200 (1.2ms) user=admin
+2026-04-22 21:29:08,914 | ERROR    | core.middleware | Error checking webapp permission: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+Traceback (most recent call last):
+  File "C:\dev\webapp_server\core\middleware.py", line 110, in dispatch
+    from core.users import user_store
+ImportError: cannot import name 'user_store' from 'core.users' (C:\dev\webapp_server\core\users.py)
+2026-04-22 21:29:08,915 | INFO     | core.middleware | [96a68fea] GET /apps/muteos/ → 302 (1.5ms) user=admin
+2026-04-22 21:29:08,920 | INFO     | core.middleware | [c264604a] GET /dashboard → 200 (1.4ms) user=admin
+2026-04-22 21:30:45,587 | INFO     | main | Shutting down Corporate Platform...

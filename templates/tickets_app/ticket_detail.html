@@ -1,0 +1,94 @@
+{% extends "base/layout.html" %}
+
+{% block header_title %}#{{ ticket.id }}: {{ ticket.title }}{% endblock %}
+{% block header_actions %}
+  <a href="/apps/tickets/{{ ticket.id }}/edit" class="btn btn-primary">Edit</a>
+  <a href="/apps/tickets/" class="btn btn-ghost">← Back</a>
+{% endblock %}
+
+{% block content %}
+{% set slabel, scls = status_labels[TicketStatus(ticket.status)] %}
+{% set plabel, pcls = priority_labels[TicketPriority(ticket.priority)] %}
+
+<div class="detail-container">
+  <div class="detail-card">
+
+    {# Status badge in avatar position #}
+    <div class="detail-avatar ticket-avatar-{{ ticket.priority }}">
+      #{{ ticket.id }}
+    </div>
+
+    <div class="detail-body">
+      <dl class="detail-list">
+
+        <div class="detail-row">
+          <dt>Status</dt>
+          <dd><span class="badge {{ scls }}">{{ slabel }}</span></dd>
+        </div>
+
+        <div class="detail-row">
+          <dt>Priority</dt>
+          <dd><span class="badge {{ pcls }}">{{ plabel }}</span></dd>
+        </div>
+
+        <div class="detail-row">
+          <dt>Reporter</dt>
+          <dd>{{ ticket.reporter }}</dd>
+        </div>
+
+        <div class="detail-row">
+          <dt>Assigned To</dt>
+          <dd>{{ ticket.assigned_to or '— unassigned —' }}</dd>
+        </div>
+
+        {% if ticket.description %}
+        <div class="detail-row detail-row-full">
+          <dt>Description</dt>
+          <dd class="notes-text">{{ ticket.description | nl2br }}</dd>
+        </div>
+        {% endif %}
+
+        <div class="detail-row">
+          <dt>Opened</dt>
+          <dd class="text-muted">{{ ticket.created_at | datetime }}</dd>
+        </div>
+
+        <div class="detail-row">
+          <dt>Last Updated</dt>
+          <dd class="text-muted">{{ ticket.updated_at | datetime }}</dd>
+        </div>
+
+      </dl>
+    </div>
+  </div>
+
+  {# ── Quick status change ────────────────────────────────────────── #}
+  <div class="detail-card" style="padding: 18px 24px;">
+    <h4 style="font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:12px;">
+      Quick Status Update
+    </h4>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      {% for s in status_options %}
+        {% if s.value != ticket.status %}
+        <form method="post" action="/apps/tickets/{{ ticket.id }}/edit">
+          <input type="hidden" name="title"       value="{{ ticket.title }}">
+          <input type="hidden" name="description" value="{{ ticket.description or '' }}">
+          <input type="hidden" name="status"      value="{{ s.value }}">
+          <input type="hidden" name="priority"    value="{{ ticket.priority }}">
+          <input type="hidden" name="assigned_to" value="{{ ticket.assigned_to or '' }}">
+          <button type="submit" class="btn btn-secondary btn-sm">→ {{ s.label }}</button>
+        </form>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="danger-zone">
+    <h4>Danger Zone</h4>
+    <form method="post" action="/apps/tickets/{{ ticket.id }}/delete"
+          onsubmit="return confirm('Delete ticket #{{ ticket.id }}? This cannot be undone.')">
+      <button type="submit" class="btn btn-danger">Delete Ticket</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
