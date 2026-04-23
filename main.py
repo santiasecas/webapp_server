@@ -3,28 +3,23 @@ Corporate Platform - Main Entry Point
 """
 import logging
 from contextlib import asynccontextmanager
-from typing import Annotated
 
-from fastapi import Depends, FastAPI, Form, HTTPException, Request, status
+from fastapi import FastAPI, Form, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.config import settings
-from core.database import Base, engine, get_db
+from core.database import Base, engine
 from core.error_handlers import register_error_handlers
 from core.logging_config import setup_logging
 from core.middleware import setup_middleware
 from core.registry import AppRegistry
-from core.permissions_model import WebappPermission  # noqa: F401
-from core.permissions_service import PermissionError, PermissionService
-from core.auth import require_auth, UserSession
 
-# Import apps to register them
-from apps.example_app import app_module       # noqa: F401
-from apps.tickets_app import app_module as _tickets_module  # noqa: F401
-from apps.muteos_app import app_module as _muteos_module  # noqa: F401
+# Import apps to register them — order determines sidebar position
+from apps.admin_app import app_module as _admin_module       # noqa: F401
+from apps.example_app import app_module                      # noqa: F401
+from apps.tickets_app import app_module as _tickets_module   # noqa: F401
+from apps.muteos_app import app_module as _muteos_module
 
 setup_logging()
 logger = logging.getLogger(__name__)
@@ -178,130 +173,3 @@ async def logout(request: Request):
     response.delete_cookie(key=COOKIE_NAME, httponly=True, samesite="lax")
     logger.info(f"Logout: ip={request.client.host}")
     return response
-
-
-# ── Admin Permissions Management ──────────────────────────────────────────────
-
-def require_admin(session: UserSession = Depends(require_auth)) -> UserSession:
-    """Dependency: user must be an admin."""
-    if not session.has_group("admins"):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Admin access required",
-        )
-    return session
-
-
-@app.post("/admin/permisos", tags=["Admin"])
-async def manage_permission(
-    admin: UserSession = Depends(require_admin),
-    db: AsyncSession = Depends(get_db),
-    usuario: str = Form(...),
-    webapp_id: str = Form(...),
-    accion: str = Form(...),
-):
-    """
-    Grant or revoke webapp access for a user (admin only).
-    
-    Args:
-        usuario: Username to grant/revoke access
-        webapp_id: Webapp identifier (e.g., 'example_app')
-        accion: 'grant' or 'revoke'
-        
-    Returns:
-        JSON response with success status
-    """
-    from core.users import user_store
-    
-    if accion not in ("grant", "revoke"):
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid action. Use 'grant' or 'revoke'",
-        )
-
-    service = PermissionService(db, user_store)
-    
-    try:
-        if accion == "grant":
-            result = await service.grant_access(usuario, webapp_id)
-        else:  # revoke
-            result = await service.revoke_access(usuario, webapp_id)
-        
-        logger.info(f"Admin {admin.username} performed {accion} for {usuario} → {webapp_id}")
-        return result
-        
-    except PermissionError as exc:
-        logger.warning(f"Permission error: {exc}")
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(exc),
-        ) from exc
-
-
-@app.get("/admin/permisos", tags=["Admin"])
-async def list_all_permissions(
-    admin: UserSession = Depends(require_admin),
-    db: AsyncSession = Depends(get_db),
-):
-    """
-    List all webapp permissions (admin only).
-    
-    Returns:
-        List of webapp_id, username, created_at for all permission records
-    """
-    # Get all permissions
-    result = await db.execute(
-        select(WebappPermission).order_by(
-            WebappPermission.webapp_id, WebappPermission.username
-        )
-    )
-    perms = result.scalars().all()
-    
-    return {
-        "count": len(perms),
-        "permissions": [
-            {
-                "id": p.id,
-                "username": p.username,
-                "webapp_id": p.webapp_id,
-                "created_at": p.created_at.isoformat(),
-            }
-            for p in perms
-        ],
-    }
-
-
-@app.get("/admin/permisos/usuario/{username}", tags=["Admin"])
-async def list_user_permissions(
-    username: str,
-    admin: UserSession = Depends(require_admin),
-    db: AsyncSession = Depends(get_db),
-):
-    """
-    List all webapps a specific user has access to (admin only).
-    
-    Args:
-        username: Username to check
-        
-    Returns:
-        List of webapps the user can access
-    """
-    from core.users import user_store
-    
-    # Validate user exists
-    user = user_store.get(username)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"User '{username}' not found",
-        )
-
-    service = PermissionService(db, user_store)
-    webapps = await service.list_user_webapps(username, user.groups)
-    
-    return {
-        "username": username,
-        "groups": user.groups,
-        "webapp_count": len(webapps),
-        "webapps": webapps,
-    }
