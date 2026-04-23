@@ -1,9 +1,16 @@
 """
 Middleware configuration.
 
-SessionRedirectMiddleware: intercepts every request, checks session cookie,
-redirects to /login for protected paths. This is the single enforcement point —
-individual route dependencies (require_auth, require_group) provide finer control.
+Execution order (outermost → innermost):
+  1. RequestLoggingMiddleware   — assigns request ID, logs timing
+  2. SessionRedirectMiddleware  — checks auth cookie + webapp permissions
+
+Permission check in SessionRedirectMiddleware:
+  - Path matches /apps/<something>  → extract webapp_id from prefix
+  - Webapp has permission_required=True → query DB
+  - Admin users → always allowed (no DB hit)
+  - Open apps  → always allowed (no DB hit)
+  - No permission row → 403 page
 """
 import logging
 import time
@@ -20,118 +27,96 @@ logger = logging.getLogger(__name__)
 
 
 def _is_public(path: str) -> bool:
-    """Returns True if the path does not require a session check."""
     return any(path.startswith(p) for p in settings.PUBLIC_PATHS)
 
 
 class SessionRedirectMiddleware(BaseHTTPMiddleware):
     """
-    Intercepts all requests:
-      - Public paths → pass through
-      - Has valid session cookie → pass through
-      - No/invalid cookie → 302 to /login?next=<original_path>
+    Gate 1 — Authentication:
+      Public paths           → pass through
+      Valid session cookie   → proceed to Gate 2
+      No/invalid cookie      → redirect to /login?next=<path>
+
+    Gate 2 — Webapp permission (only for /apps/* paths):
+      Admin user             → always pass
+      App not permission_required → pass
+      User has DB permission → pass
+      Otherwise              → 403 Forbidden page
     """
 
     async def dispatch(self, request: Request, call_next) -> Response:
-        # Always allow public paths
+        # Gate 1 — Public paths bypass everything
         if _is_public(request.url.path):
             return await call_next(request)
 
-        # Check for valid session cookie
-        from core.auth import get_session, _RedirectToLogin
+        # Gate 1 — Session check
+        from core.auth import get_session
         session = get_session(request)
         if session is None:
             next_url = request.url.path
             if request.url.query:
                 next_url += f"?{request.url.query}"
-            logger.debug(f"Unauthenticated access to {request.url.path} → redirect to /login")
-            return RedirectResponse(
-                url=f"/login?next={next_url}",
-                status_code=302,
-            )
+            logger.debug(f"Unauthenticated → /login  path={request.url.path}")
+            return RedirectResponse(url=f"/login?next={next_url}", status_code=302)
 
-        # Attach session to request state so handlers can access it without Depends
+        # Attach session for downstream handlers
         request.state.session = session
+
+        # Gate 2 — Webapp permission check (only for /apps/* routes)
+        if request.url.path.startswith("/apps/"):
+            from core.registry import AppRegistry
+            app_info = AppRegistry.get_app_by_prefix(request.url.path)
+
+            if app_info is not None and app_info.get("permission_required", False):
+                # Admins always have access — skip DB
+                if not session.is_admin:
+                    allowed = await self._check_permission(
+                        session.username, app_info["name"]
+                    )
+                    if not allowed:
+                        logger.warning(
+                            f"Permission denied: user={session.username!r} "
+                            f"webapp={app_info['name']!r} path={request.url.path}"
+                        )
+                        return await self._forbidden_response(request, app_info)
+
         return await call_next(request)
 
-
-class WebappPermissionMiddleware(BaseHTTPMiddleware):
-    """
-    Verifies user has access to requested webapp.
-    
-    Rules:
-    - Admins have access to all webapps
-    - Regular users need explicit permission
-    - Bypass for non-webapp paths
-    """
-
-    async def dispatch(self, request: Request, call_next) -> Response:
-        # Skip permission check for non-webapp paths
-        if not request.url.path.startswith("/apps/"):
-            return await call_next(request)
-
-        # Get session (should already be attached by SessionRedirectMiddleware)
-        session = getattr(request.state, "session", None)
-        if session is None:
-            # This shouldn't happen if SessionRedirectMiddleware worked correctly
-            return RedirectResponse(url="/login", status_code=302)
-
-        # Admins bypass permission check
-        if session.has_group("admins"):
-            return await call_next(request)
-
-        # Extract webapp_id from path (e.g., /apps/tickets/ → 'tickets_app')
-        # Path format: /apps/{webapp_name}/ or /apps/{webapp_name}/...
-        parts = request.url.path.strip("/").split("/")
-        if len(parts) < 2:
-            return RedirectResponse(url="/dashboard", status_code=302)
-
-        webapp_name = parts[1]  # e.g., 'tickets'
-        
-        # Map webapp name to webapp_id
-        # Convention: 'tickets' → 'tickets_app'
-        from core.registry import AppRegistry
-        
-        # Find matching app
-        webapp_id = None
-        for app_id, app_info in AppRegistry.apps.items():
-            if app_info["prefix"] == f"/apps/{webapp_name}":
-                webapp_id = app_id
-                break
-
-        if not webapp_id:
-            # Webapp not found, let it through (will 404 naturally)
-            return await call_next(request)
-
-        # Check permission asynchronously
+    async def _check_permission(self, username: str, webapp_id: str) -> bool:
+        """Open a DB session and check the permission table."""
         try:
             from core.database import AsyncSessionFactory
-            from core.permissions_service import PermissionService
-            from core.users import user_store
-
+            from core.permissions import PermissionRepository
             async with AsyncSessionFactory() as db:
-                service = PermissionService(db, user_store)
-                has_access = await service.check_access(
-                    session.username,
-                    webapp_id,
-                    session.groups,
-                )
-
-            if not has_access:
-                logger.warning(
-                    f"Access denied: {session.username} tried to access {webapp_id} "
-                    f"from {request.url.path}"
-                )
-                return RedirectResponse(
-                    url=f"/dashboard?error=Access+denied+to+{webapp_id}",
-                    status_code=302,
-                )
+                repo = PermissionRepository(db)
+                return await repo.has_permission(username, webapp_id)
         except Exception as e:
-            logger.error(f"Error checking webapp permission: {e}", exc_info=True)
-            # On error, deny access (fail closed)
-            return RedirectResponse(url="/dashboard?error=Permission+check+failed", status_code=302)
+            logger.error(f"Permission DB check failed: {e}")
+            return False  # Deny on error — fail secure
 
-        return await call_next(request)
+    async def _forbidden_response(self, request: Request, app_info: dict) -> Response:
+        """Return a proper 403 HTML page."""
+        try:
+            from core.templates import templates
+            return templates.TemplateResponse(
+                "base/error.html",
+                {
+                    "request": request,
+                    "status_code": 403,
+                    "detail": (
+                        f"You don't have permission to access "
+                        f"'{app_info['name'].replace('_', ' ').title()}'. "
+                        f"Contact an administrator to request access."
+                    ),
+                },
+                status_code=403,
+            )
+        except Exception:
+            from fastapi.responses import HTMLResponse
+            return HTMLResponse(
+                "<h1>403 Forbidden</h1><p>You do not have access to this application.</p>",
+                status_code=403,
+            )
 
 
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
@@ -155,18 +140,11 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
 
 
 def setup_middleware(app: FastAPI) -> None:
-    """Register all platform middleware. Order matters — last added = outermost."""
+    """Register all platform middleware. Last added = outermost."""
 
-    # Innermost: permissions check (runs after session validation)
-    app.add_middleware(WebappPermissionMiddleware)
-
-    # Session redirect (runs after permissions check)
     app.add_middleware(SessionRedirectMiddleware)
-
-    # Outermost: request logging (wraps everything)
     app.add_middleware(RequestLoggingMiddleware)
 
-    # CORS
     if settings.ENVIRONMENT == "development":
         app.add_middleware(
             CORSMiddleware,

@@ -22,12 +22,27 @@
           <span class="nav-icon">⊞</span> Dashboard
         </a>
       </li>
+      {% set all_apps = apps() %}
+      {# ── Admin section (admins only) ────────────────────────────── #}
+      {% if session and session.is_admin %}
+        {% for app in all_apps if app.name == "admin_app" %}
+        <li class="nav-divider nav-divider-admin">ADMIN</li>
+        <li class="nav-item nav-item-admin {% if request.url.path.startswith(app.prefix) %}active{% endif %}">
+          <a href="{{ app.prefix }}/">
+            <span class="nav-icon">{{ app.icon }}</span>
+            {{ app.name | replace('_', ' ') | title }}
+          </a>
+        </li>
+        {% endfor %}
+      {% endif %}
+      {# ── Regular apps ────────────────────────────────────────────── #}
       <li class="nav-divider">APPS</li>
-      {% for app in apps() %}
+      {% for app in all_apps if app.name != "admin_app" %}
       <li class="nav-item {% if request.url.path.startswith(app.prefix) %}active{% endif %}">
         <a href="{{ app.prefix }}/">
           <span class="nav-icon">{{ app.icon }}</span>
           {{ app.name | replace('_', ' ') | title }}
+          {% if app.permission_required %}<span class="nav-lock">🔒</span>{% endif %}
         </a>
       </li>
       {% endfor %}

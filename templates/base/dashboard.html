@@ -11,6 +11,7 @@
     <div class="app-card-body">
       <h3 class="app-card-title">{{ app.name | replace('_', ' ') | title }}</h3>
       <p class="app-card-desc">{{ app.description }}</p>
+    {% if app.permission_required %}<span class="app-card-lock">🔒 Permission required</span>{% endif %}
     </div>
     <span class="app-card-arrow">→</span>
   </a>

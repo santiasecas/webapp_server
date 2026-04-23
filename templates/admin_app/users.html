@@ -1,0 +1,48 @@
+{% extends "base/layout.html" %}
+
+{% block header_title %}Users{% endblock %}
+{% block header_actions %}
+  <a href="/admin/" class="btn btn-ghost">← Admin</a>
+{% endblock %}
+
+{% block content %}
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Display Name</th>
+        <th>Groups</th>
+        <th>Status</th>
+        <th class="col-actions">Permissions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td><code class="code-inline">{{ user.username }}</code></td>
+        <td>{{ user.display_name }}</td>
+        <td>
+          {% for g in user.groups %}
+            <span class="badge {% if g == 'admins' %}badge-red{% elif g == 'viewers' %}badge-yellow{% else %}badge-blue{% endif %}">{{ g }}</span>
+          {% endfor %}
+        </td>
+        <td>
+          {% if user.active %}
+            <span class="badge badge-green">Active</span>
+          {% else %}
+            <span class="badge badge-gray">Disabled</span>
+          {% endif %}
+        </td>
+        <td class="col-actions">
+          <a href="/admin/permissions/user/{{ user.username }}" class="btn btn-sm">View</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="admin-hint">
+  To add, remove or change user passwords, use <code class="code-inline">python scripts/manage_users.py</code>.
+</p>
+{% endblock %}

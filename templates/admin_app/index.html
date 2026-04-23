@@ -1,0 +1,123 @@
+{% extends "base/layout.html" %}
+
+{% block header_title %}Administration{% endblock %}
+{% block header_actions %}
+  <a href="/admin/permissions/" class="btn btn-primary">🔑 Manage Permissions</a>
+{% endblock %}
+
+{% block content %}
+
+{# ── Stats ───────────────────────────────────────────────────────── #}
+<div class="admin-stats-row">
+  <div class="admin-stat-card">
+    <span class="admin-stat-num">{{ stats.total_users }}</span>
+    <span class="admin-stat-label">Total Users</span>
+    <span class="admin-stat-sub">{{ stats.active_users }} active</span>
+  </div>
+  <div class="admin-stat-card">
+    <span class="admin-stat-num">{{ stats.total_groups }}</span>
+    <span class="admin-stat-label">Groups</span>
+    <span class="admin-stat-sub">{{ groups | join(', ') }}</span>
+  </div>
+  <div class="admin-stat-card">
+    <span class="admin-stat-num">{{ stats.total_apps }}</span>
+    <span class="admin-stat-label">Registered Apps</span>
+    <span class="admin-stat-sub">{{ stats.restricted_apps }} permission-restricted</span>
+  </div>
+</div>
+
+{# ── Apps overview ───────────────────────────────────────────────── #}
+<div class="admin-section">
+  <div class="admin-section-header">
+    <h2 class="admin-section-title">Registered Applications</h2>
+  </div>
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>App</th>
+          <th>URL Prefix</th>
+          <th>Category</th>
+          <th>Access Mode</th>
+          <th class="col-actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for app in apps %}
+        {% if app.name != 'admin_app' %}
+        <tr>
+          <td>
+            <span class="app-row-icon">{{ app.icon }}</span>
+            <strong>{{ app.name | replace('_', ' ') | title }}</strong>
+          </td>
+          <td><code class="code-inline">{{ app.prefix }}/</code></td>
+          <td><span class="badge badge-gray">{{ app.category }}</span></td>
+          <td>
+            {% if app.permission_required %}
+              <span class="badge badge-red">🔒 Permission required</span>
+            {% else %}
+              <span class="badge badge-green">🔓 Open to all users</span>
+            {% endif %}
+          </td>
+          <td class="col-actions">
+            <a href="/admin/permissions/webapp/{{ app.name }}" class="btn btn-sm btn-secondary">
+              View access
+            </a>
+          </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{# ── Users overview ──────────────────────────────────────────────── #}
+<div class="admin-section">
+  <div class="admin-section-header">
+    <h2 class="admin-section-title">Users</h2>
+    <a href="/admin/users" class="btn btn-ghost btn-sm">View all →</a>
+  </div>
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Display Name</th>
+          <th>Groups</th>
+          <th>Status</th>
+          <th class="col-actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td><code class="code-inline">{{ user.username }}</code></td>
+          <td>{{ user.display_name }}</td>
+          <td>
+            {% for g in user.groups %}
+              <span class="badge {% if g == 'admins' %}badge-red{% elif g == 'viewers' %}badge-yellow{% else %}badge-blue{% endif %}">
+                {{ g }}
+              </span>
+            {% endfor %}
+          </td>
+          <td>
+            {% if user.active %}
+              <span class="badge badge-green">Active</span>
+            {% else %}
+              <span class="badge badge-gray">Disabled</span>
+            {% endif %}
+          </td>
+          <td class="col-actions">
+            <a href="/admin/permissions/user/{{ user.username }}" class="btn btn-sm btn-secondary">
+              Permissions
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends "base/layout.html" %}
+
+{% block header_title %}{{ title }}{% endblock %}
+{% block header_actions %}
+  <a href="{{ back_url }}" class="btn btn-ghost">← Permissions</a>
+{% endblock %}
+
+{% block content %}
+
+{# ── Context header ──────────────────────────────────────────────── #}
+{% if filter_label == 'webapp' and app_info %}
+<div class="detail-card" style="margin-bottom:24px;">
+  <div class="detail-avatar">{{ app_info.icon }}</div>
+  <div class="detail-body">
+    <dl class="detail-list">
+      <div class="detail-row">
+        <dt>Application</dt>
+        <dd><strong>{{ app_info.name | replace('_', ' ') | title }}</strong></dd>
+      </div>
+      <div class="detail-row">
+        <dt>ID</dt>
+        <dd><code class="code-inline">{{ app_info.name }}</code></dd>
+      </div>
+      <div class="detail-row">
+        <dt>URL Prefix</dt>
+        <dd><code class="code-inline">{{ app_info.prefix }}/</code></dd>
+      </div>
+      <div class="detail-row">
+        <dt>Access Mode</dt>
+        <dd>
+          {% if app_info.permission_required %}
+            <span class="badge badge-red">🔒 Permission required</span>
+          {% else %}
+            <span class="badge badge-green">🔓 Open to all authenticated users</span>
+          {% endif %}
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+{% elif filter_label == 'user' and user_record %}
+<div class="detail-card" style="margin-bottom:24px;">
+  <div class="detail-avatar">{{ user_record.display_name[0] | upper }}</div>
+  <div class="detail-body">
+    <dl class="detail-list">
+      <div class="detail-row">
+        <dt>Username</dt>
+        <dd><code class="code-inline">{{ user_record.username }}</code></dd>
+      </div>
+      <div class="detail-row">
+        <dt>Display Name</dt>
+        <dd>{{ user_record.display_name }}</dd>
+      </div>
+      <div class="detail-row">
+        <dt>Groups</dt>
+        <dd>
+          {% for g in user_record.groups %}
+            <span class="badge {% if g == 'admins' %}badge-red{% else %}badge-blue{% endif %}">{{ g }}</span>
+          {% endfor %}
+        </dd>
+      </div>
+      <div class="detail-row">
+        <dt>Status</dt>
+        <dd>
+          {% if user_record.active %}
+            <span class="badge badge-green">Active</span>
+          {% else %}
+            <span class="badge badge-gray">Disabled</span>
+          {% endif %}
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+{% endif %}
+
+{# ── Permissions list ────────────────────────────────────────────── #}
+<div class="admin-section">
+  <div class="admin-section-header">
+    <h2 class="admin-section-title">
+      Explicit Permissions
+      <span class="admin-section-count">({{ permissions | length }})</span>
+    </h2>
+  </div>
+
+  {% if permissions %}
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          {% if filter_label == 'webapp' %}
+            <th>User</th>
+          {% else %}
+            <th>Application</th>
+          {% endif %}
+          <th>Granted By</th>
+          <th>Granted On</th>
+          <th class="col-actions">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for perm in permissions %}
+        <tr>
+          {% if filter_label == 'webapp' %}
+            <td>
+              <a href="/admin/permissions/user/{{ perm.username }}">
+                <code class="code-inline">{{ perm.username }}</code>
+              </a>
+            </td>
+          {% else %}
+            <td>
+              <a href="/admin/permissions/webapp/{{ perm.webapp_id }}">
+                <code class="code-inline">{{ perm.webapp_id }}</code>
+              </a>
+            </td>
+          {% endif %}
+          <td class="text-muted">{{ perm.granted_by }}</td>
+          <td class="text-muted">{{ perm.created_at | datetime }}</td>
+          <td class="col-actions">
+            <form method="post" action="/admin/permissions/"
+                  onsubmit="return confirm('Revoke this permission?')">
+              <input type="hidden" name="username" value="{{ perm.username }}">
+              <input type="hidden" name="webapp_id" value="{{ perm.webapp_id }}">
+              <input type="hidden" name="accion" value="revoke">
+              <button type="submit" class="btn btn-sm btn-danger">Revoke</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <span class="empty-icon">🔑</span>
+    <p>No explicit permissions found.</p>
+    {% if filter_label == 'webapp' and app_info and not app_info.permission_required %}
+      <p class="text-muted" style="font-size:.85rem;">
+        This app is open to all authenticated users — no permissions needed.
+      </p>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+
+{# ── Quick grant form ────────────────────────────────────────────── #}
+{% if filter_label == 'webapp' and app_info and app_info.permission_required %}
+<div class="admin-section" style="margin-top:24px;">
+  <div class="admin-section-header">
+    <h2 class="admin-section-title">Grant Access</h2>
+  </div>
+  <form method="post" action="/admin/permissions/" class="quick-grant-form">
+    <input type="hidden" name="webapp_id" value="{{ filter_value }}">
+    <input type="hidden" name="accion" value="grant">
+    <div class="quick-form-fields">
+      <div class="field">
+        <label class="field-label">Username</label>
+        <input type="text" name="username" class="field-input"
+               placeholder="e.g. alice" required autocomplete="off" />
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Grant Access</button>
+    </div>
+  </form>
+</div>
+{% endif %}
+
+{% endblock %}

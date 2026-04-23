@@ -24,6 +24,7 @@ AppRegistry.register(
     description="Registro de incidencias y tareas internas",
     icon="🎫",
     category="Operations",
+    permission_required=True,   # Users need explicit access granted by an admin
 )
 
 app_module = tickets_app

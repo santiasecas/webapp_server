@@ -1,0 +1,175 @@
+{% extends "base/layout.html" %}
+
+{% block header_title %}Permission Matrix{% endblock %}
+{% block header_actions %}
+  <a href="/admin/" class="btn btn-ghost">← Admin</a>
+{% endblock %}
+
+{% block content %}
+
+{# ── Flash message ───────────────────────────────────────────────── #}
+{% if msg %}
+  <div class="alert alert-{{ msg_type }}" id="flash-msg">
+    {% if msg_type == 'success' %}✓{% else %}✗{% endif %} {{ msg }}
+  </div>
+{% endif %}
+
+{# ── Legend ──────────────────────────────────────────────────────── #}
+<div class="perm-legend">
+  <span class="perm-legend-item">
+    <span class="perm-cell perm-granted" style="display:inline-flex;width:22px;height:22px;"></span>
+    Access granted
+  </span>
+  <span class="perm-legend-item">
+    <span class="perm-cell perm-denied" style="display:inline-flex;width:22px;height:22px;"></span>
+    No access
+  </span>
+  <span class="perm-legend-item">
+    <span class="perm-cell perm-admin" style="display:inline-flex;width:22px;height:22px;"></span>
+    Admin (always allowed)
+  </span>
+  <span class="perm-legend-item">
+    <span class="perm-cell perm-open" style="display:inline-flex;width:22px;height:22px;"></span>
+    Open app (no permission needed)
+  </span>
+</div>
+
+{# ── Permission Matrix Table ─────────────────────────────────────── #}
+{% if matrix.users and matrix.apps %}
+<div class="perm-matrix-wrap">
+  <table class="perm-matrix">
+    <thead>
+      <tr>
+        <th class="perm-user-col">User</th>
+        {% for app in matrix.apps %}
+        <th class="perm-app-col">
+          <a href="/admin/permissions/webapp/{{ app.id }}" class="perm-app-link" title="{{ app.id }}">
+            <span class="perm-app-icon">{{ app.icon }}</span>
+            <span class="perm-app-name">{{ app.label }}</span>
+          </a>
+          {% if app.permission_required %}
+            <span class="perm-app-badge">🔒</span>
+          {% else %}
+            <span class="perm-app-badge perm-app-open">🔓</span>
+          {% endif %}
+        </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for username in matrix.users %}
+      {# Check if user is admin - need to pass this from Python, approximate in template #}
+      <tr>
+        <td class="perm-user-cell">
+          <a href="/admin/permissions/user/{{ username }}" class="perm-user-link">
+            <span class="perm-user-avatar">{{ username[0] | upper }}</span>
+            {{ username }}
+          </a>
+        </td>
+        {% for app in matrix.apps %}
+          {% set grant_key = username ~ '::' ~ app.id %}
+          {% set has_grant = matrix.grants.get(grant_key, False) %}
+          <td class="perm-cell-td">
+            {% if not app.permission_required %}
+              {# Open app — no permission management needed #}
+              <div class="perm-cell perm-open" title="Open app — all authenticated users">
+                <span>—</span>
+              </div>
+            {% elif has_grant %}
+              {# Has explicit permission — show revoke button #}
+              <form method="post" action="/admin/permissions/">
+                <input type="hidden" name="username" value="{{ username }}">
+                <input type="hidden" name="webapp_id" value="{{ app.id }}">
+                <input type="hidden" name="accion" value="revoke">
+                <button type="submit" class="perm-cell perm-granted"
+                        title="Revoke access for {{ username }} on {{ app.id }}"
+                        onclick="return confirm('Revoke access for {{ username }} on {{ app.label }}?')">
+                  ✓
+                </button>
+              </form>
+            {% else %}
+              {# No permission — show grant button #}
+              <form method="post" action="/admin/permissions/">
+                <input type="hidden" name="username" value="{{ username }}">
+                <input type="hidden" name="webapp_id" value="{{ app.id }}">
+                <input type="hidden" name="accion" value="grant">
+                <button type="submit" class="perm-cell perm-denied"
+                        title="Grant access for {{ username }} on {{ app.id }}">
+                  ✕
+                </button>
+              </form>
+            {% endif %}
+          </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% else %}
+<div class="empty-state">
+  <span class="empty-icon">🔑</span>
+  <p>No users or apps registered yet.</p>
+</div>
+{% endif %}
+
+{# ── Quick grant/revoke form (also useful for scripting) ─────────── #}
+<div class="admin-section" style="margin-top: 32px;">
+  <div class="admin-section-header">
+    <h2 class="admin-section-title">Quick Access Control</h2>
+  </div>
+  <div class="perm-quick-form">
+    <form method="post" action="/admin/permissions/" class="quick-grant-form">
+      <div class="quick-form-fields">
+        <div class="field">
+          <label class="field-label">User</label>
+          <select name="username" class="field-input" required>
+            <option value="">— Select user —</option>
+            {% for username in matrix.users %}
+              <option value="{{ username }}">{{ username }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Application</label>
+          <select name="webapp_id" class="field-input" required>
+            <option value="">— Select app —</option>
+            {% for app in matrix.apps %}
+              {% if app.permission_required %}
+                <option value="{{ app.id }}">{{ app.icon }} {{ app.label }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label class="field-label">Action</label>
+          <select name="accion" class="field-input">
+            <option value="grant">Grant access</option>
+            <option value="revoke">Revoke access</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Apply</button>
+      </div>
+    </form>
+
+    {# ── JSON API reference ────────────────────────────────────────── #}
+    <div class="api-reference">
+      <h4 class="api-ref-title">JSON API</h4>
+      <p class="api-ref-desc">
+        Automate permission management via <code class="code-inline">POST /admin/permissions/api</code>
+        with a JSON body:
+      </p>
+      <pre class="code-block">{
+  "usuario_id": "alice",
+  "webapp_id":  "example_app",
+  "accion":     "grant"
+}</pre>
+      <p class="api-ref-desc">Requires session cookie with <code class="code-inline">admins</code> group.</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
